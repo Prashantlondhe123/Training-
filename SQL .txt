@@ -1,0 +1,67 @@
+# how to handle null value when we have null in foreign key while joining two table
+select ename, dname
+from emp_nulls e join dept d
+on IsNull(e.deptno, 10) = d.deptno
+go
+
+# There is another way of joining more than 2 tables using the concept of M
+
+select empno,ename,e.deptno
+
+from e Join d Join p
+
+on d.pcode = p.pcode -- 1 to be mentioned first in sequence
+
+on e.deptno = d.deptno; -- 2 to be mentioned afterwards
+
+
+# Including all the tables in the single join command and mentioning the conditions in " order.
+
+select ename, dname, pname from e join d on e.deptno = d.deptno on p.c1 = z.c1
+
+join p on d.pcode = p.pcode join z
+
+join y
+
+on z.c2 = y.c2
+
+
+# Run mutiple sql statement at a time :
+use te
+
+go
+
+select * into emp_nulls from emp
+
+go
+
+Update emp_nulls
+
+set deptno = null
+
+where ename in ('SMITH', 'MARTIN')
+
+go
+
+select ename, deptno from emp_nulls
+
+go
+
+select ename, dname
+
+from emp_nulls e join dept d
+
+on e.deptno = d.deptno
+
+go
+
+#  join  :
+select ename, dname
+
+from emp1 left join dept1
+
+on emp1.deptno = dept1.deptno
+
+where dept1.deptno is null
+
+#
